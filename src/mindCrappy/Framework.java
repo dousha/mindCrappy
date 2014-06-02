@@ -66,9 +66,9 @@ public class Framework extends JFrame{
 		public JLabel lblBdcast = new JLabel();
 		public JLabel lblOnGoing = new JLabel();
 		public JLabel lblTasks = new JLabel();
-		public String bdcast;
-		public String onGoing;
-		public String tasks;
+		public String bdcast; // !d
+		public String onGoing; // !d
+		public String tasks; // !d
 		public JTabbedPane bdpane = new JTabbedPane();
 		public framework(){
 			lblBdcast.setText(bdcast);
@@ -87,6 +87,7 @@ public class Framework extends JFrame{
 			btnStart = new BtnStart("\u542f\u52a8\u6e38\u620f",572,364,131,66);
 			btnExit = new BtnExit("X",670,12,34,34);
 			bdpane.setBounds(12, 198, 455, 231);
+			
 			this.add(btnStart);
 			this.add(btnAbout);
 			this.add(btnSetting);
@@ -114,7 +115,6 @@ public class Framework extends JFrame{
 			"Java\u8def\u5f84:" + 
 			data.getJavaPath() +
 			"</html>";
-			System.out.println(builder);
 			return builder;
 		}
 		

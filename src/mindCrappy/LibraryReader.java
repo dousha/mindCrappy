@@ -16,6 +16,7 @@ public class LibraryReader {
 	
 	public String read(){
 			data.readSettings();
+			data.checkOSType();
 			String readIn = "";
 			String line = null;
 			try{
@@ -58,7 +59,10 @@ public class LibraryReader {
 						parts[1],parts[2]
 				});
 				name[i] = name[i] + "/" + result;
-				name[i] = data.getBase() + "/libraries/" + name[i] + ":";
+				if((data.getOSType().equals("Linux")) || (data.getOSType().toLowerCase().equals("osx")))
+					name[i] = data.getBase() + "/libraries/" + name[i] + ":";
+				else
+					name[i] = data.getBase() + "/libraries/" + name[i] + ";";
 				rawLibs += name[i];
 			}
 			StringBuffer libs = new StringBuffer();

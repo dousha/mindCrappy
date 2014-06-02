@@ -42,7 +42,7 @@ public class Cylinder {
 
 	public void checkOSType() {
 		Properties props = System.getProperties();
-		props.getProperty("os.name");
+		this.OSType = props.getProperty("os.name");
 	}
 
 	public void readSettings() {

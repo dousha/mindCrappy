@@ -4,6 +4,22 @@ import java.io.*;
 import java.net.*;
 
 public class WebIO{
+	private String bdcast;
+	private String onGoing;
+	private String tasks;
+	
+	public String getBdcast(){
+		return bdcast;
+	}
+	
+	public String getOnGoing(){
+		return onGoing;
+	}
+	
+	public String tasks(){
+		return tasks;
+	}
+	
 	public class checkUpdate extends Thread{
 		@Override
 		public void run() {
@@ -51,6 +67,18 @@ public class WebIO{
 				e.printStackTrace();
 			}
 		}
+	}
+	
+	public class getBroadcast implements Runnable{
+		@Override
+		public void run() {
+			try{
+				URL addr = new URL("http://someweb.example.com/update/modt.md");
+			}catch(Exception ex){
+				ex.printStackTrace();
+			}
+		}
+		
 	}
 	
 }

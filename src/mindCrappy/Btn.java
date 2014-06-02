@@ -10,8 +10,8 @@ import java.awt.event.MouseMotionListener;
 
 import javax.swing.*;
 
-public class Btn extends JPanel implements MouseListener, MouseMotionListener{
-	
+public class Btn extends JPanel implements MouseListener, MouseMotionListener {
+
 	/**
 	 * 
 	 */
@@ -20,7 +20,8 @@ public class Btn extends JPanel implements MouseListener, MouseMotionListener{
 	public String title;
 	public int status;
 	public Cylinder data = new Cylinder();
-	public Btn(String name, int x, int y, int width, int height){
+
+	public Btn(String name, int x, int y, int width, int height) {
 		this.status = 0;
 		this.setBounds(x, y, width, height);
 		this.addMouseListener(this);
@@ -29,29 +30,36 @@ public class Btn extends JPanel implements MouseListener, MouseMotionListener{
 		this.title = name;
 		this.setVisible(true);
 	}
-	
-	public void paintComponent(Graphics g){
+
+	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		switch (status)
-		{
-		case 0:
-			g.setColor(Color.GRAY);
-			g.fillRoundRect(0, 0, getWidth()-6, getHeight()-6, 2, 2);
+		if (isEnable) {
+			switch (status) {
+			case 0:
+				g.setColor(Color.GRAY);
+				g.fillRoundRect(0, 0, getWidth() - 6, getHeight() - 6, 2, 2);
+				g.setColor(Color.BLACK);
+				g.drawRoundRect(0, 0, getWidth() - 6, getHeight() - 6, 5, 5);
+				break;
+			case 1:
+				g.setColor(Color.LIGHT_GRAY);
+				g.fillRoundRect(0, 0, getWidth() - 6, getHeight() - 6, 2, 2);
+				g.setColor(Color.BLACK);
+				g.drawRoundRect(0, 0, getWidth() - 6, getHeight() - 6, 5, 5);
+				break;
+			case 2:
+				g.setColor(Color.DARK_GRAY);
+				g.fillRoundRect(0, 0, getWidth() - 6, getHeight() - 6, 2, 2);
+				g.setColor(Color.BLACK);
+				g.drawRoundRect(0, 0, getWidth() - 6, getHeight() - 6, 5, 5);
+				break;
+			}
+		}
+		else{
+			g.setColor(Color.WHITE);
+			g.fillRoundRect(0, 0, getWidth() - 6, getHeight() - 6, 2, 2);
 			g.setColor(Color.BLACK);
-			g.drawRoundRect(0, 0, getWidth()-6, getHeight()-6, 5, 5);
-			break;
-		case 1:
-			g.setColor(Color.LIGHT_GRAY);
-			g.fillRoundRect(0, 0, getWidth()-6, getHeight()-6, 2, 2);
-			g.setColor(Color.BLACK);
-			g.drawRoundRect(0, 0, getWidth()-6, getHeight()-6, 5, 5);
-			break;
-		case 2:
-			g.setColor(Color.DARK_GRAY);
-			g.fillRoundRect(0, 0, getWidth()-6, getHeight()-6, 2, 2);
-			g.setColor(Color.BLACK);
-			g.drawRoundRect(0, 0, getWidth()-6, getHeight()-6, 5, 5);
-			break;
+			g.drawRoundRect(0, 0, getWidth() - 6, getHeight() - 6, 5, 5);
 		}
 		g.setColor(Color.BLACK);
 		g.setFont(new Font(data.getFontType(), 0, 16));
@@ -69,22 +77,24 @@ public class Btn extends JPanel implements MouseListener, MouseMotionListener{
 		g.drawString(title, x - 1, y - 1);
 	}
 
+	public void setEnableMode(boolean newMode) {
+		this.isEnable = newMode;
+	}
+
 	@Override
 	public void mouseDragged(MouseEvent arg0) {
-		
+
 	}
 
 	@Override
 	public void mouseMoved(MouseEvent arg0) {
-		
+
 	}
 
 	public void mouseClicked(MouseEvent e) {
-		if (!isEnable)
-		{
+		if (!isEnable) {
 			return;
-		} else
-		{
+		} else {
 			isClicked(e);
 			e.consume();
 			return;
@@ -92,8 +102,9 @@ public class Btn extends JPanel implements MouseListener, MouseMotionListener{
 	}
 
 	public void mouseEntered(MouseEvent e) {
-		if(!isEnable) return;
-		if(status != 1){
+		if (!isEnable)
+			return;
+		if (status != 1) {
 			status = 1;
 			repaint();
 		}
@@ -102,8 +113,9 @@ public class Btn extends JPanel implements MouseListener, MouseMotionListener{
 	}
 
 	public void mouseExited(MouseEvent e) {
-		if(!isEnable) return;
-		if(status == 1){
+		if (!isEnable)
+			return;
+		if (status == 1) {
 			status = 0;
 			repaint();
 		}
@@ -112,8 +124,9 @@ public class Btn extends JPanel implements MouseListener, MouseMotionListener{
 	}
 
 	public void mousePressed(MouseEvent e) {
-		if(!isEnable) return;
-		if(status == 1){
+		if (!isEnable)
+			return;
+		if (status == 1) {
 			status = 2;
 			repaint();
 		}
@@ -122,32 +135,33 @@ public class Btn extends JPanel implements MouseListener, MouseMotionListener{
 	}
 
 	public void mouseReleased(MouseEvent e) {
-		if(!isEnable) return;
-		if(status == 2){
+		if (!isEnable)
+			return;
+		if (status == 2) {
 			status = 0;
 			repaint();
 		}
 		isReleased(e);
 		e.consume();
 	}
-	
-	public void isClicked(MouseEvent e){
-		
+
+	public void isClicked(MouseEvent e) {
+
 	}
-	
-	public void isEntered(MouseEvent e){
-		
+
+	public void isEntered(MouseEvent e) {
+
 	}
-	
-	public void isExited(MouseEvent e){
-		
+
+	public void isExited(MouseEvent e) {
+
 	}
-	
-	public void isPressed(MouseEvent e){
-		
+
+	public void isPressed(MouseEvent e) {
+
 	}
-	
-	public void isReleased(MouseEvent e){
-		
+
+	public void isReleased(MouseEvent e) {
+
 	}
 }

@@ -128,7 +128,14 @@ public class DialogSetting extends JFrame{
 					data.set64bitMode(true);
 				else
 					data.set64bitMode(false);
-				data.setGamePath(iptGamePath.getText());
+				if(iptGamePath.getText().isEmpty()){
+					Object[] option = {"\u8fd4\u56de\u68c0\u67e5"};
+					JOptionPane.showOptionDialog(null, "\u60a8\u4f3c\u4e4e\u5c11\u8f93\u5165\u4e86\u4e00\u4e9b\u4e1c\u897f...", "Oops!", JOptionPane.YES_OPTION, JOptionPane.PLAIN_MESSAGE, null, option, option[0]);
+					iptGamePath.setBackground(Color.RED);
+					return;
+				}
+				else
+					data.setGamePath(iptGamePath.getText());
 				data.saveSettings();
 				dispose();
 			}
@@ -160,14 +167,15 @@ public class DialogSetting extends JFrame{
 				if(i){
 					i = false;
 					Object[] option = {"\u6211\u77e5\u9053\u4e86"};
-					JOptionPane.showOptionDialog(null, "\u8bf7\u76f4\u63a5\u9009\u62e9\u5305\u542b\u6e38\u620fjar\u7684\u6587\u4ef6\u5939", "Notice!", JOptionPane.YES_OPTION, JOptionPane.PLAIN_MESSAGE, null, option, option[0]);
+					JOptionPane.showOptionDialog(null, "\u8bf7\u76f4\u63a5\u9009\u62e9jar\u6587\u4ef6", "Notice!", JOptionPane.YES_OPTION, JOptionPane.PLAIN_MESSAGE, null, option, option[0]);
 				}
 				try{
 					JFileChooser j = new JFileChooser();
 					j.setCurrentDirectory(new File("."));
-					j.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+					j.setFileHidingEnabled(true);
 					j.showOpenDialog(null);
-					iptGamePath.setText(data.getGamePath());
+					String s = j.getSelectedFile().getParentFile().getAbsoluteFile().toString();
+					iptGamePath.setText(s);
 				}catch(NullPointerException ex){
 					// It's a general error when user didn't select any file
 					// This exception will be consumed
