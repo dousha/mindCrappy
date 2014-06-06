@@ -241,30 +241,5 @@ public class Cylinder {
 		return gamePath;
 	}
 	
-	public String resolveGame(){
-		// TODO resolve the libraries of the game
-		// i'm going to write the resolve file for the game!
-		// 不被建议的方法
-		if(this.verifyGame() == 0){
-			String readOut = "";
-			try{
-				File f = new File("./configure/resolve.vf");
-				if(!f.exists())
-					return null; // should download the latest file here
-				BufferedReader br = new BufferedReader(new InputStreamReader(
-						new FileInputStream("./configure/resolve.vf")));
-				readOut = br.readLine();
-				if(readOut == null){
-					br.close();
-					return null;
-				}
-				br.close();
-			}catch(Exception ex){
-				
-			}
-			return readOut;
-		}
-		return null;
-	}
 	
 }

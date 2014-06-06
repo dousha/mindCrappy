@@ -24,6 +24,8 @@ public class Framework extends JFrame{
 	public BtnStart btnStart;
 	public BtnExit btnExit;
 	
+	public WebIO web;
+	
 	public Framework(){
 		// setup
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);

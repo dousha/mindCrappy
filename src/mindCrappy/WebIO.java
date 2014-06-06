@@ -70,13 +70,22 @@ public class WebIO{
 	}
 	
 	public class getBroadcast implements Runnable{
+		private WebIO web;
 		@Override
 		public void run() {
+			StringBuffer buff = new StringBuffer();
 			try{
-				URL addr = new URL("http://someweb.example.com/update/modt.md");
+				URL addr = new URL("https://github.com/dousha/mindCrappy/blob/master/update/motd.md");
+				InputStream inBuff = new BufferedInputStream(addr.openStream());
+				InputStreamReader buffReader = new InputStreamReader(inBuff, "UTF-8");
+				int c;
+				while((c = buffReader.read()) != -1){
+					buff.append((char) c);
+				}
 			}catch(Exception ex){
 				ex.printStackTrace();
 			}
+			web.bdcast = buff.toString();
 		}
 		
 	}
