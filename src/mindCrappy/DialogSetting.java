@@ -106,7 +106,7 @@ public class DialogSetting extends JFrame{
 			// Warning! This button is for developers only!
 			// Test your function here!
 			public void mouseClicked(MouseEvent e){
-				jr.read();
+				
 			}
 		});
 		

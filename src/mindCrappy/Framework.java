@@ -6,7 +6,6 @@ import java.awt.GraphicsEnvironment;
 import java.awt.Point;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-
 import javax.swing.*;
 
 public class Framework extends JFrame{
@@ -24,7 +23,7 @@ public class Framework extends JFrame{
 	public BtnStart btnStart;
 	public BtnExit btnExit;
 	
-	public WebIO web;
+	public WebIO web = new WebIO();
 	
 	public Framework(){
 		// setup
@@ -62,20 +61,21 @@ public class Framework extends JFrame{
 	}
 	
 	public class framework extends JPanel{
+		private WebIO web = new WebIO();
+		private Cylinder data = new Cylinder();
 		private static final long serialVersionUID = 1L;
 		public JPanel blockInfo = new JPanel();
 		public JLabel lblInfo = new JLabel();
 		public JLabel lblBdcast = new JLabel();
 		public JLabel lblOnGoing = new JLabel();
 		public JLabel lblTasks = new JLabel();
-		public String bdcast; // !d
-		public String onGoing; // !d
-		public String tasks; // !d
 		public JTabbedPane bdpane = new JTabbedPane();
+		public JButton btnRefresh = new JButton();
 		public framework(){
-			lblBdcast.setText(bdcast);
-			lblOnGoing.setText(onGoing);
-			lblTasks.setText(tasks);
+			data.init();
+			lblBdcast.setText(data.getBdcast());
+			// lblOnGoing.setText(web.getOnGoing());
+			// lblTasks.setText(web.getTasks());
 			bdpane.addTab("\u516c\u544a\u677f", lblBdcast);
 			bdpane.addTab("\u5f53\u524d\u4efb\u52a1", lblOnGoing);
 			bdpane.addTab("\u8ba1\u5212\u4efb\u52a1", lblTasks);
@@ -89,6 +89,16 @@ public class Framework extends JFrame{
 			btnStart = new BtnStart("\u542f\u52a8\u6e38\u620f",572,364,131,66);
 			btnExit = new BtnExit("X",670,12,34,34);
 			bdpane.setBounds(12, 198, 455, 231);
+			btnRefresh.setBounds(12, 12, 26, 26);
+			btnRefresh.setText("~");
+			
+			btnRefresh.addMouseListener(new MouseAdapter(){
+				public void mouseClicked(MouseEvent e) {
+					if(data.getBdcast() == null)
+						web.updateBdcast();
+					lblBdcast.setText(data.getBdcast());
+				}
+			});
 			
 			this.add(btnStart);
 			this.add(btnAbout);
@@ -96,6 +106,7 @@ public class Framework extends JFrame{
 			this.add(blockInfo);
 			this.add(bdpane);
 			this.add(btnExit);
+			this.add(btnRefresh);
 			blockInfo.add(lblInfo);
 			this.setVisible(true);
 			this.repaint();
@@ -120,9 +131,6 @@ public class Framework extends JFrame{
 			return builder;
 		}
 		
-		public void update(){
-			
-		}
 	}
 	
 	public static void main(String[] args){

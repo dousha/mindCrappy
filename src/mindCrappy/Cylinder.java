@@ -17,6 +17,7 @@ public class Cylinder {
 	private boolean inGame = false;
 	private String fontType = "";
 	private File gamePath;
+	private String bdcast = "";
 
 	public String getUsername() {
 		return username;
@@ -87,7 +88,6 @@ public class Cylinder {
 						.append(":").append(javaPath).append(":")
 						.append(memSize).append(":").append("false").append(":").append(gamePath).toString();
 			}
-			System.out.println(writeIn);
 			bw.write(writeIn);
 			System.out.println("Written >> " + writeIn);
 			bw.flush();
@@ -101,12 +101,24 @@ public class Cylinder {
 	
 	public void init() {
 		File dir = new File("./configure");
+		File update = new File("./cache");
 		File config = new File("./configure/configure.vf");
+		File bdcast = new File("./cache/bdcast.md");
 		if (!dir.exists()) {
 			dir.mkdir();
 			if (!config.exists()) {
 				try {
 					config.createNewFile();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		if (!update.exists()) {
+			update.mkdir();
+			if (!bdcast.exists()) {
+				try {
+					bdcast.createNewFile();
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
@@ -241,5 +253,24 @@ public class Cylinder {
 		return gamePath;
 	}
 	
+	public String getBdcast() {
+		try {
+			File f = new File("./cache/bdcast.md");
+			if(f.exists()){
+				BufferedReader br = new BufferedReader(new InputStreamReader(
+						new FileInputStream("./cache/bdcast.md")));
+				String readOut = br.readLine();
+				if(readOut == null){
+					br.close();
+					return null;
+				}
+				br.close();
+				this.bdcast = readOut;
+			}
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		}
+		return bdcast;
+	}
 	
 }

@@ -4,20 +4,11 @@ import java.io.*;
 import java.net.*;
 
 public class WebIO{
-	private String bdcast;
-	private String onGoing;
-	private String tasks;
+	public checkUpdate ckupdate = new checkUpdate();
 	
-	public String getBdcast(){
-		return bdcast;
-	}
-	
-	public String getOnGoing(){
-		return onGoing;
-	}
-	
-	public String tasks(){
-		return tasks;
+	public void updateBdcast(){
+		getBroadcast getBdcast = new getBroadcast();
+		getBdcast.start();
 	}
 	
 	public class checkUpdate extends Thread{
@@ -43,7 +34,7 @@ public class WebIO{
 		}
 	}
 	
-	public class downloadUpdateScript implements Runnable{
+	public class downloadUpdateScript extends Thread{
 		@Override
 		public void run() {
 			try {
@@ -69,23 +60,32 @@ public class WebIO{
 		}
 	}
 	
-	public class getBroadcast implements Runnable{
-		private WebIO web;
+	public class getBroadcast extends Thread{
 		@Override
 		public void run() {
 			StringBuffer buff = new StringBuffer();
 			try{
-				URL addr = new URL("https://github.com/dousha/mindCrappy/blob/master/update/motd.md");
-				InputStream inBuff = new BufferedInputStream(addr.openStream());
-				InputStreamReader buffReader = new InputStreamReader(inBuff, "UTF-8");
-				int c;
-				while((c = buffReader.read()) != -1){
-					buff.append((char) c);
+				URL url=new URL("https://raw.githubusercontent.com/dousha/mindCrappy/master/update/motd.md"); 
+				URLConnection conn = url.openConnection();
+				BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+				String line = null;
+				while ((line = reader.readLine()) != null) {
+					buff.append(line);
 				}
 			}catch(Exception ex){
 				ex.printStackTrace();
 			}
-			web.bdcast = buff.toString();
+			try {
+				BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(
+						new FileOutputStream("./cache/bdcast.md")));
+				String writeIn = "";
+				writeIn += buff.toString();
+				bw.write(writeIn);
+				bw.flush();
+				bw.close();
+			} catch (IOException ex) {
+				ex.printStackTrace();
+			}
 		}
 		
 	}
