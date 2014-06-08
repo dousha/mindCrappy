@@ -18,6 +18,10 @@ public class Cylinder {
 	private String fontType = "";
 	private File gamePath;
 	private String bdcast = "";
+	
+	public Cylinder(){
+		
+	}
 
 	public String getUsername() {
 		return username;
@@ -104,6 +108,7 @@ public class Cylinder {
 		File update = new File("./cache");
 		File config = new File("./configure/configure.vf");
 		File bdcast = new File("./cache/bdcast.md");
+		File dump = new File("./cache/isRunning");
 		if (!dir.exists()) {
 			dir.mkdir();
 			if (!config.exists()) {
@@ -124,6 +129,10 @@ public class Cylinder {
 				}
 			}
 		}
+		if(dump.exists()){
+			dump.delete();
+		}
+		
 		this.readSettings();
 	}
 	
@@ -265,7 +274,8 @@ public class Cylinder {
 					return null;
 				}
 				br.close();
-				this.bdcast = readOut;
+				if(this.bdcast != readOut)
+					this.bdcast = readOut;
 			}
 		} catch (IOException ex) {
 			ex.printStackTrace();

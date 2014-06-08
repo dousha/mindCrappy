@@ -1,0 +1,10 @@
+[13:23:29] [main/INFO]: Setting user: dousha99
+[13:23:32] [Client thread/INFO]: LWJGL Version: 2.9.0
+[13:23:40] [Client thread/INFO]: Reloading ResourceManager: Default, FMLFileResourcePack:Forge Mod Loader, FMLFileResourcePack:Minecraft Forge, FMLFileResourcePack:CustomNpcs, FMLFileResourcePack:Lots of Food[CN_Dark]
+[13:23:44] [Client thread/WARN]: File customnpcs:sounds/human/girl/villager/What do you need.ogg does not exist, cannot add it to event customnpcs:human.girl.villager.what_do_you_need
+[13:23:44] [Client thread/WARN]: File customnpcs:sounds/human/girl/villager/Would you like to trade.ogg does not exist, cannot add it to event customnpcs:human.girl.villager.trade
+[13:23:50] [Sound Library Loader/INFO]: Sound engine started
+[13:23:52] [Client thread/INFO]: Created: 512x256 textures/blocks-atlas
+[13:23:54] [Client thread/INFO]: Created: 512x512 textures/items-atlas
+[13:24:15] [MCO Availability Checker #1/ERROR]: Couldn't connect to Realms
+[13:25:13] [Client thread/INFO]: Stopping!

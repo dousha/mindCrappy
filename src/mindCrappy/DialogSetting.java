@@ -59,7 +59,6 @@ public class DialogSetting extends JFrame{
 		data.setSettingMode(true);
 		this.setFont(data.getFont());
 		this.setLayout(null);
-		data.init();
 		lblUsername.setText("\u7528\u6237\u540d");
 		lblJavaPath.setText("Java\u8def\u5f84");
 		iptJavaPath.setBounds(105, 68, 197, 24);
