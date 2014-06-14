@@ -1,9 +1,11 @@
 package mindCrappy;
 
+import java.awt.AlphaComposite;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
@@ -19,6 +21,7 @@ public class Btn extends JPanel implements MouseListener, MouseMotionListener {
 	public boolean isEnable;
 	public String title;
 	public int status;
+	public AlphaComposite composite;
 	public Cylinder data = new Cylinder();
 
 	public Btn(String name, int x, int y, int width, int height) {
@@ -29,29 +32,33 @@ public class Btn extends JPanel implements MouseListener, MouseMotionListener {
 		this.isEnable = true;
 		this.title = name;
 		this.setVisible(true);
+		this.setOpaque(false);
+		this.composite = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.6f);
 	}
 
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		if (isEnable) {
+			Graphics2D g2 = (Graphics2D) g;
 			switch (status) {
 			case 0:
-				g.setColor(Color.GRAY);
-				g.fillRoundRect(0, 0, getWidth() - 6, getHeight() - 6, 2, 2);
-				g.setColor(Color.BLACK);
-				g.drawRoundRect(0, 0, getWidth() - 6, getHeight() - 6, 5, 5);
+				g2.setComposite(composite);
+				g2.setColor(new Color(0xCCCCCC));
+				g2.fillRoundRect(0, 0, getWidth() - 6, getHeight() - 6, 2, 2);
+				g2.setColor(Color.BLACK);
+				g2.drawRoundRect(0, 0, getWidth() - 6, getHeight() - 6, 5, 5);
 				break;
 			case 1:
-				g.setColor(Color.LIGHT_GRAY);
-				g.fillRoundRect(0, 0, getWidth() - 6, getHeight() - 6, 2, 2);
-				g.setColor(Color.BLACK);
-				g.drawRoundRect(0, 0, getWidth() - 6, getHeight() - 6, 5, 5);
+				g2.setColor(Color.LIGHT_GRAY);
+				g2.fillRoundRect(0, 0, getWidth() - 6, getHeight() - 6, 2, 2);
+				g2.setColor(Color.BLACK);
+				g2.drawRoundRect(0, 0, getWidth() - 6, getHeight() - 6, 5, 5);
 				break;
 			case 2:
-				g.setColor(Color.DARK_GRAY);
-				g.fillRoundRect(0, 0, getWidth() - 6, getHeight() - 6, 2, 2);
-				g.setColor(Color.BLACK);
-				g.drawRoundRect(0, 0, getWidth() - 6, getHeight() - 6, 5, 5);
+				g2.setColor(Color.GRAY);
+				g2.fillRoundRect(0, 0, getWidth() - 6, getHeight() - 6, 2, 2);
+				g2.setColor(Color.BLACK);
+				g2.drawRoundRect(0, 0, getWidth() - 6, getHeight() - 6, 5, 5);
 				break;
 			}
 		}
@@ -69,9 +76,9 @@ public class Btn extends JPanel implements MouseListener, MouseMotionListener {
 		int stringDescent = fm.getDescent();
 		int x = getWidth() / 2 - stringWidth / 2;
 		int y = getHeight() / 2 + (stringAscent - stringDescent) / 2;
-		g.drawString(title, x + 1, y + 1);
+		// g.drawString(title, x + 1, y + 1); REMOVE TEXT SHADOWS
 		if (isEnable)
-			g.setColor(Color.WHITE);
+			g.setColor(Color.BLACK);
 		else
 			g.setColor(Color.LIGHT_GRAY);
 		g.drawString(title, x - 1, y - 1);
@@ -164,4 +171,5 @@ public class Btn extends JPanel implements MouseListener, MouseMotionListener {
 	public void isReleased(MouseEvent e) {
 
 	}
+	
 }

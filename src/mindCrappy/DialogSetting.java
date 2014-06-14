@@ -151,8 +151,8 @@ public class DialogSetting extends JFrame{
 		});
 		btnFind.addMouseListener(new MouseAdapter(){
 			public void mouseClicked(MouseEvent e){
-				iptJavaPath.setText("java");
-				iptJavaPath.setEnabled(false);
+				String getPath = System.getProperties().getProperty("java.home");
+				iptJavaPath.setText(getPath + "/bin/java");
 			}
 		});
 		iptUsername.addKeyListener(new KeyAdapter(){
