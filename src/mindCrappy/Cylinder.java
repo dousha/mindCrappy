@@ -6,18 +6,17 @@ import java.io.*;
 import java.util.*;
 
 public class Cylinder {
-	private String username = "";
+	private String username;
 	private int memSize = 1024;
-	private String OSType = "";
+	private String OSType;
 	private String javaPath = "java";
 	private boolean is64bit = false;
 	private Font font;
 	private String version = "14y5a";
 	private boolean inSetting = false;
 	private boolean inGame = false;
-	private String fontType = "";
+	private String fontType;
 	private File gamePath;
-	private String bdcast = "";
 	
 	public Cylinder(){
 		
@@ -105,10 +104,7 @@ public class Cylinder {
 	
 	public void init() {
 		File dir = new File("./configure");
-		File update = new File("./cache");
 		File config = new File("./configure/configure.vf");
-		File bdcast = new File("./cache/bdcast.md");
-		File dump = new File("./cache/isRunning");
 		if (!dir.exists()) {
 			dir.mkdir();
 			if (!config.exists()) {
@@ -119,20 +115,6 @@ public class Cylinder {
 				}
 			}
 		}
-		if (!update.exists()) {
-			update.mkdir();
-			if (!bdcast.exists()) {
-				try {
-					bdcast.createNewFile();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
-		}
-		if(dump.exists()){
-			dump.delete();
-		}
-		
 		this.readSettings();
 	}
 	
@@ -141,38 +123,6 @@ public class Cylinder {
 		File ba = new File(base.getParent());
 		String b = ba.getParent();
 		return b;
-	}
-	public int verifyGame() {
-		if(this.getOSType() == "Linux"){
-			// act like Linux
-			File f = new File("~/.minecraft");
-			if(f.isDirectory()){
-				if(!f.exists())
-					return -1;
-				else
-					return 0;
-			}
-		}
-		if(this.getOSType().toLowerCase() == "osx"){
-			// act like Mac
-			File f = new File("~/Library/Application Support/.minecraft");
-			if(f.isDirectory()){
-				if(!f.exists())
-					return -1;
-				else
-					return 0;
-			}
-		}
-		else{
-			File f = new File("./.minecraft");
-			if(f.isDirectory()){
-				if(!f.exists())
-					return -1;
-				else
-					return 0;
-			}
-		}
-		return 2;
 	}
 	
 	public Font getFont() {
@@ -191,7 +141,7 @@ public class Cylinder {
 		// "font" is a READ ONLY value!
 		if(this.getOSType() == "Linux")
 			// use Linux Safety Font, like WenQuanYi ZenHei
-			this.font = new Font("WenQuanYi Zen Hei",Font.PLAIN,16);
+			this.font = new Font("Droid Sans",Font.PLAIN,16);
 		else
 			// use Standard Font
 			this.font = new Font("SansSerif", 0, 16);
@@ -199,9 +149,9 @@ public class Cylinder {
 	
 	public void setFontType(){
 		if(this.getOSType() == "Linux")
-			this.fontType = "WenQuanYi Zen Hei";
+			this.fontType = "Droid Sans";
 		else
-			this.fontType = "SansSerif";
+			this.fontType = "SimSun";
 	}
 	
 	public String getVersion(){
@@ -260,27 +210,6 @@ public class Cylinder {
 	
 	public File getGamePathRaw(){
 		return gamePath;
-	}
-	
-	public String getBdcast() {
-		try {
-			File f = new File("./cache/bdcast.md");
-			if(f.exists()){
-				BufferedReader br = new BufferedReader(new InputStreamReader(
-						new FileInputStream("./cache/bdcast.md")));
-				String readOut = br.readLine();
-				if(readOut == null){
-					br.close();
-					return null;
-				}
-				br.close();
-				if(this.bdcast != readOut)
-					this.bdcast = readOut;
-			}
-		} catch (IOException ex) {
-			ex.printStackTrace();
-		}
-		return bdcast;
 	}
 	
 }
