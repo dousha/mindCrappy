@@ -164,7 +164,12 @@ public class Cylinder {
 			// act like Linux or Mac
 			this.javaPath = "java";
 		if(this.getOSType().toLowerCase() == "windows")
-			this.javaPath = System.getProperty("java.home") + "\\bin\\javaw.exe";
+			if(System.getProperty("java.home").endsWith("\\"))
+				this.javaPath = System.getProperty("java.home") 
+				+ "bin\\javaw.exe";
+			else
+				this.javaPath = System.getProperty("java.home")
+				+ "\\bin\\javaw.exe";
 	}
 	
 	public void setJavaPath(String newPath){

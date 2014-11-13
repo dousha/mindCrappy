@@ -43,7 +43,7 @@ public class DialogSetting extends JFrame{
 	public GraphicsDevice GD;
 	public DisplayMode DM;
 	
-	public DialogSetting(){
+	public DialogSetting(Framework fmwk){
 		GE = GraphicsEnvironment.getLocalGraphicsEnvironment();
 		GD = GE.getDefaultScreenDevice();
 		DM = GD.getDisplayMode();
@@ -136,6 +136,7 @@ public class DialogSetting extends JFrame{
 				else
 					data.setGamePath(iptGamePath.getText());
 				data.saveSettings();
+				fmwk.frame.refreshInfo();
 				dispose();
 			}
 		});

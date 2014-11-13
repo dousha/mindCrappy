@@ -26,7 +26,9 @@ public class Assets {
 		}
 		catch(IOException ex){
 			ex.printStackTrace();
-			System.exit(0);
+			icon = null;
+			btnE = null;
+			bkgnd = null;
 		}
 	}
 	

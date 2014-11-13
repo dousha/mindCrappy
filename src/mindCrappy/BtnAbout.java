@@ -16,8 +16,8 @@ public class BtnAbout extends Btn{
 				.println("Thanks for clicking About button!\n"
 						+ "Oh! Right!\n"
 						+ "Do you want to join us?\n"
-						+ "Contact me via QQ!\n"
-						+ "Account Num: 565910397\n"
+						+ "Contact me via email!\n"
+						+ "Send your email to dsstudio@qq.com\n"
 						+ "dousha Studio Creative Department & Programming Department.\n");
 		JOptionPane
 				.showConfirmDialog(

@@ -83,6 +83,9 @@ public class BdcastPane extends JPanel{
 		public void run() {
 			StringBuffer buff = new StringBuffer();
 			try {
+				// and broadcast loads from here
+				// you can point it to your server or so
+				// this is just a demo
 				URL url = new URL(
 						"https://raw.githubusercontent.com/dousha/mindCrappy/master/update/motd.md");
 				URLConnection conn = url.openConnection();
